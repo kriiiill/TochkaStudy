@@ -771,41 +771,61 @@ button,[data-action],.day-step,.ref-grid button,.problems button{ -webkit-user-s
 
 
 <style id="v11-reference-fix">
-/* v1.1 — mobile-safe interactive reference */
-.v11-ref{margin-top:0!important;background:linear-gradient(180deg,#0a3532 0%,#07302e 100%);border-radius:24px;padding:26px!important;color:#fff;overflow:visible!important}
-.v11-ref-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px}
-.v11-ref-head .eyebrow{margin:0 0 7px;color:#7edbd2}
-.v11-ref-head h2{margin:0;color:#fff;font-size:clamp(25px,4vw,36px);line-height:1.05}
-.v11-ref-head p{margin:0;max-width:430px;color:#b7d2cf;line-height:1.5;font-size:14px}
-.v11-ref-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;background:none!important}
-.v11-ref-card{appearance:none!important;width:100%!important;min-width:0!important;min-height:132px!important;padding:20px!important;border:1px solid rgba(190,239,69,.18)!important;border-radius:18px!important;background:#123f3b!important;color:#fff!important;text-align:left!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;cursor:pointer!important;box-shadow:none!important;overflow:hidden!important}
-.v11-ref-card:hover{background:#184a45!important;border-color:rgba(190,239,69,.45)!important;transform:translateY(-1px)}
-.v11-ref-card.is-active{background:#1d5049!important;border-color:#b7ef45!important;box-shadow:0 0 0 1px rgba(183,239,69,.15) inset!important}
-.v11-ref-num{display:block!important;color:#b7ef45!important;font-size:11px!important;font-weight:900!important;letter-spacing:.12em!important;margin:0!important}
-.v11-ref-title{display:block!important;font-size:18px!important;font-weight:800!important;line-height:1.15!important;margin:12px 0 5px!important;color:#fff!important}
-.v11-ref-desc{display:block!important;color:#a9c8c4!important;font-size:12px!important;line-height:1.4!important;margin:0!important;max-width:none!important}
-.v11-ref-arrow{display:block!important;color:#b7ef45!important;font-size:20px!important;line-height:1!important;margin-top:13px!important;align-self:flex-end!important}
-.v11-ref-detail{display:none;margin-top:12px;background:#f7fbf9;border:1px solid #d6e8e4;border-radius:18px;color:#173f3c;overflow:hidden;scroll-margin-top:78px}
-.v11-ref-detail.is-open{display:block}
-.v11-ref-detail-inner{padding:22px}
-.v11-ref-detail h3{margin:0 0 8px;font-size:22px;line-height:1.15;color:#073f3a}
-.v11-ref-detail p{margin:0 0 14px;color:#5d7472;line-height:1.55;font-size:14px}
-.v11-ref-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
-.v11-ref-list li{background:#fff;border:1px solid #e1ece9;border-radius:11px;padding:11px 12px;font-size:13px;line-height:1.45;color:#34514e}
-.v11-ref-list strong{color:#075f55}
-.v11-ref-note{margin-top:14px!important;padding:11px 12px;background:#e7f6f1;border-radius:11px;color:#35625e!important;font-size:12px!important}
+/* v1.1 — «Справочник через ситуации»: рабочий интерфейс сварщика */
+.v11-ref{margin-top:0!important;background:linear-gradient(145deg,#082f2c 0%,#0b3d38 58%,#0a3431 100%);border-radius:26px;padding:30px!important;color:#fff;overflow:visible!important;box-shadow:0 18px 50px rgba(7,48,45,.12)}
+.v11-ref-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:25px}
+.v11-ref-head .eyebrow{margin:0 0 8px;color:#83ddd2;font-size:11px;letter-spacing:.14em;font-weight:900}
+.v11-ref-head h2{margin:0;color:#fff;font-size:clamp(28px,4vw,42px);line-height:1.02;letter-spacing:-.025em}
+.v11-ref-head p{margin:0;max-width:430px;color:#b7d2cf;line-height:1.55;font-size:14px}
+.v11-situation-label{display:flex;align-items:center;gap:10px;margin:0 0 12px;color:#b9d9d4;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.v11-situation-label:after{content:"";height:1px;flex:1;background:rgba(255,255,255,.12)}
+.v11-situation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.v11-situation{appearance:none!important;position:relative;width:100%!important;min-width:0!important;min-height:122px!important;padding:19px 20px!important;border:1px solid rgba(191,239,69,.16)!important;border-radius:18px!important;background:rgba(255,255,255,.055)!important;color:#fff!important;text-align:left!important;display:grid!important;grid-template-columns:44px 1fr 20px!important;grid-template-rows:auto 1fr!important;column-gap:13px!important;align-items:start!important;cursor:pointer!important;box-shadow:none!important;transition:transform .18s ease,background .18s ease,border-color .18s ease!important}
+.v11-situation:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)!important;border-color:rgba(191,239,69,.42)!important}
+.v11-situation.is-active{background:#194c46!important;border-color:#b7ef45!important;box-shadow:0 0 0 1px rgba(183,239,69,.13) inset!important}
+.v11-situation-icon{grid-row:1 / span 2;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#b7ef45;color:#0b3b37;font-size:20px;font-weight:900;line-height:1}
+.v11-situation-title{display:block;font-size:17px;font-weight:850;line-height:1.15;margin:2px 0 6px;color:#fff}
+.v11-situation-desc{display:block;color:#a9c8c4;font-size:12px;line-height:1.42;padding-right:5px}
+.v11-situation-arrow{grid-column:3;grid-row:1 / span 2;align-self:center;color:#b7ef45;font-size:22px;line-height:1}
+.v11-situation-detail{display:none;margin-top:13px;background:#f5faf8;border:1px solid #d7e8e4;border-radius:19px;color:#173f3c;overflow:hidden;scroll-margin-top:78px}
+.v11-situation-detail.is-open{display:block}
+.v11-detail-top{padding:22px 23px 18px;border-bottom:1px solid #dfece9;background:linear-gradient(180deg,#ffffff 0%,#f5faf8 100%)}
+.v11-detail-kicker{margin-bottom:7px;color:#0b8176;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.v11-detail-top h3{margin:0 0 7px;color:#073f3a;font-size:23px;line-height:1.1;letter-spacing:-.015em}
+.v11-detail-top p{margin:0;color:#607875;font-size:13px;line-height:1.55;max-width:760px}
+.v11-detail-body{padding:18px 23px 22px}
+.v11-detail-steps{display:grid;gap:8px;margin:0;padding:0;list-style:none;counter-reset:steps}
+.v11-detail-step{display:grid;grid-template-columns:34px 1fr;gap:11px;align-items:start;background:#fff;border:1px solid #e0ece9;border-radius:13px;padding:12px 13px}
+.v11-detail-step:before{counter-increment:steps;content:counter(steps);width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#e5f6f1;color:#08796f;font-size:11px;font-weight:900}
+.v11-detail-step span{color:#34514e;font-size:13px;line-height:1.5;padding-top:3px}
+.v11-detail-step strong{color:#075f55}
+.v11-detail-note{margin-top:13px;padding:13px 14px;background:#e8f6f1;border-radius:12px;color:#35625e;font-size:12px;line-height:1.5}
+.v11-detail-note b{color:#075f55}
+.v11-detail-metric{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}
+.v11-metric{padding:13px;border-radius:13px;background:#fff;border:1px solid #e0ece9}
+.v11-metric strong{display:block;color:#075f55;font-size:15px;margin-bottom:4px}
+.v11-metric span{display:block;color:#607875;font-size:11px;line-height:1.35}
+.v11-ref-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding-top:17px;border-top:1px solid rgba(255,255,255,.11);color:#9fc1bc;font-size:11px;line-height:1.45}
+.v11-ref-footer b{color:#d4eee9}
 @media(max-width:800px){
- .v11-ref{padding:18px!important;border-radius:20px}
- .v11-ref-head{display:block;margin-bottom:16px}
- .v11-ref-head h2{font-size:30px}
- .v11-ref-head p{margin-top:9px;font-size:13px}
- .v11-ref-grid{grid-template-columns:1fr!important;gap:9px!important}
- .v11-ref-card{min-height:104px!important;padding:17px!important}
- .v11-ref-title{font-size:18px!important;margin-top:8px!important}
- .v11-ref-arrow{position:absolute;right:17px;bottom:17px;margin:0!important}
- .v11-ref-card{position:relative;padding-right:48px!important}
- .v11-ref-detail-inner{padding:18px}
- .v11-ref-detail h3{font-size:20px}
+ .v11-ref{padding:19px!important;border-radius:21px}
+ .v11-ref-head{display:block;margin-bottom:20px}
+ .v11-ref-head h2{font-size:31px}
+ .v11-ref-head p{margin-top:10px;font-size:13px}
+ .v11-situation-grid{grid-template-columns:1fr;gap:9px}
+ .v11-situation{min-height:98px!important;padding:15px!important;grid-template-columns:42px 1fr 18px!important;column-gap:12px!important}
+ .v11-situation-icon{width:42px;height:42px;border-radius:13px;font-size:19px}
+ .v11-situation-title{font-size:17px}
+ .v11-situation-desc{font-size:12px}
+ .v11-detail-top{padding:19px 17px 16px}
+ .v11-detail-top h3{font-size:21px}
+ .v11-detail-body{padding:15px 17px 18px}
+ .v11-detail-step{grid-template-columns:30px 1fr;gap:9px;padding:11px}
+ .v11-detail-step:before{width:26px;height:26px;border-radius:8px}
+ .v11-detail-step span{font-size:12.5px}
+ .v11-detail-metric{grid-template-columns:1fr;gap:7px}
+ .v11-ref-footer{display:block}
+ .v11-ref-footer span{display:block;margin-top:6px}
 }
 </style>
 
@@ -865,82 +885,114 @@ function boot(){
    legacy.className='section v11-ref';
    legacy.innerHTML=`
      <div class="v11-ref-head">
-       <div><div class="eyebrow">БЫСТРЫЙ ДОСТУП</div><h2>Справочник</h2></div>
-       <p>Выберите нужную тему. Информация открывается прямо под выбранным разделом — без ухода вниз страницы.</p>
+       <div><div class="eyebrow">СПРАВОЧНИК СВАРЩИКА</div><h2>Что происходит на объекте?</h2></div>
+       <p>Выберите ситуацию — справочник сразу покажет короткий алгоритм действий, контрольные точки и важные нюансы.</p>
      </div>
-     <div class="v11-ref-grid">
-       <button class="v11-ref-card is-active" type="button" data-ref="signal">
-         <span class="v11-ref-num">01</span><span class="v11-ref-title">Сигнал</span><span class="v11-ref-desc">Уровни, потери и контроль результата</span><span class="v11-ref-arrow">→</span>
+     <div class="v11-situation-label"><span>БЫСТРЫЙ ВЫБОР</span></div>
+     <div class="v11-situation-grid">
+       <button class="v11-situation is-active" type="button" data-situation="new-closure">
+         <span class="v11-situation-icon">01</span><span><b class="v11-situation-title">Новая муфта</b><span class="v11-situation-desc">Муфта варится с нуля: найти свободное волокно, определить сплиттер и оформить результат.</span></span><span class="v11-situation-arrow">→</span>
        </button>
-       <button class="v11-ref-card" type="button" data-ref="splitter">
-         <span class="v11-ref-num">02</span><span class="v11-ref-title">Сплиттеры</span><span class="v11-ref-desc">1×4, 1×8, 50/50 и 10/90</span><span class="v11-ref-arrow">→</span>
+       <button class="v11-situation" type="button" data-situation="existing-closure">
+         <span class="v11-situation-icon">02</span><span><b class="v11-situation-title">Муфта уже сварена</b><span class="v11-situation-desc">Новая сварка в ранее подготовленной муфте и контроль сигнала абонента.</span></span><span class="v11-situation-arrow">→</span>
        </button>
-       <button class="v11-ref-card" type="button" data-ref="fiber">
-         <span class="v11-ref-num">03</span><span class="v11-ref-title">Волокно</span><span class="v11-ref-desc">Зачистка, очистка, скол и КДЗС</span><span class="v11-ref-arrow">→</span>
+       <button class="v11-situation" type="button" data-situation="full-closure">
+         <span class="v11-situation-icon">03</span><span><b class="v11-situation-title">Муфта заполнена</b><span class="v11-situation-desc">На карте она красная: свободных мест нет, но подключение не всегда невозможно.</span></span><span class="v11-situation-arrow">→</span>
        </button>
-       <button class="v11-ref-card" type="button" data-ref="tools">
-         <span class="v11-ref-num">04</span><span class="v11-ref-title">Инструмент</span><span class="v11-ref-desc">Что должно быть у сварщика перед выездом</span><span class="v11-ref-arrow">→</span>
+       <button class="v11-situation" type="button" data-situation="low-signal">
+         <span class="v11-situation-icon">04</span><span><b class="v11-situation-title">Низкий сигнал</b><span class="v11-situation-desc">Уровень на терминале ниже ожидаемого — что проверить до завершения заявки.</span></span><span class="v11-situation-arrow">→</span>
        </button>
-       <button class="v11-ref-card" type="button" data-ref="cable">
-         <span class="v11-ref-num">05</span><span class="v11-ref-title">Кабель</span><span class="v11-ref-desc">Подготовка, ввод и работа в муфте</span><span class="v11-ref-arrow">→</span>
+       <button class="v11-situation" type="button" data-situation="welding">
+         <span class="v11-situation-icon">05</span><span><b class="v11-situation-title">Нужно выполнить сварку</b><span class="v11-situation-desc">Короткий алгоритм подготовки волокна, сварки, КДЗС и укладки в кассету.</span></span><span class="v11-situation-arrow">→</span>
        </button>
-       <button class="v11-ref-card" type="button" data-ref="terms">
-         <span class="v11-ref-num">06</span><span class="v11-ref-title">Термины</span><span class="v11-ref-desc">Короткие рабочие пояснения без сленга</span><span class="v11-ref-arrow">→</span>
+       <button class="v11-situation" type="button" data-situation="report">
+         <span class="v11-situation-icon">06</span><span><b class="v11-situation-title">Завершение заявки</b><span class="v11-situation-desc">Измерить, заполнить отчёт, приложить фото, проверить карту и выполнить регистрацию.</span></span><span class="v11-situation-arrow">→</span>
        </button>
      </div>
-     <div class="v11-ref-detail is-open" id="v11-ref-detail"></div>`;
+     <div class="v11-situation-detail is-open" id="v11-situation-detail"></div>
+     <div class="v11-ref-footer"><b>Подсказка:</b><span>справочник предназначен для быстрого ориентирования на объекте; если рабочая инструкция компании отличается, приоритет имеет действующая внутренняя инструкция.</span></div>`;
 
    const data={
-    signal:{title:'Сигнал',text:'Быстрая оценка уровня сигнала на абонентской точке.',items:[
-      '<strong>−8…−25 дБм</strong> — нормальный диапазон.',
-      '<strong>−25…−27 дБм</strong> — пограничный уровень, результат нужно контролировать внимательнее.',
-      '<strong>ниже −27 дБм</strong> — слабый сигнал, требуется разбор причины.'
-    ],note:'При оценке результата смотрите не только на число, но и на этап линии, на котором появился рост потерь.'},
-    splitter:{title:'Сплиттеры',text:'Основные варианты, с которыми сварщик работает в муфтах.',items:[
-      '<strong>1×4</strong> и <strong>1×8</strong> — основные сплиттеры в описанном рабочем процессе.',
-      '<strong>50/50</strong> — деление сигнала пополам, ориентировочная потеря около 3 дБ.',
-      '<strong>10/90</strong> — вариант, когда нужно забрать небольшую долю сигнала на нового абонента, сохранив основную ветку.'
-    ],note:'Если муфта отмечена красным как заполненная, это не означает автоматический запрет на подключение: сначала оценивают сигнал и возможность дополнительного деления.'},
-    fiber:{title:'Волокно',text:'Критические моменты подготовки перед сваркой.',items:[
-      '<strong>КДЗС</strong> надевается на волокно до начала подготовки.',
-      '<strong>Зачистка → очистка спиртом → скол</strong> выполняются последовательно и аккуратно.',
-      'Не касайтесь торца сколотого волокна руками или загрязнёнными поверхностями.',
-      'После сварки КДЗС нужно отцентрировать, прогреть и дать полностью остыть перед укладкой в кассету.'
-    ],note:'Плохой скол, загрязнение или неправильное положение КДЗС — типовые причины проблем со сваркой.'},
-    tools:{title:'Инструмент',text:'Минимум, который стоит проверить перед выездом.',items:[
-      '<strong>Сварочник</strong> и <strong>скалыватель</strong>.',
-      '<strong>Стриппер</strong>, нож и запасные лезвия.',
-      '<strong>Спирт</strong> и безворсовые салфетки.',
-      '<strong>КДЗС</strong>, изолента, хомуты и остальные расходники по маршруту.',
-      '<strong>Модемы и роутеры</strong> — по рабочему чек-листу.'
-    ],note:'Перед выездом используйте отдельный чек-лист сварщика, чтобы не вспоминать расходники уже на объекте.'},
-    cable:{title:'Кабель',text:'Короткая последовательность работы с кабелем в муфте.',items:[
-      'Зафиксировать кабель и подготовить место работы.',
-      'Вскрыть кабель, освободить нужный модуль и удалить остатки гидрофобного заполнителя.',
-      'Зачистить выбранное волокно, очистить его безворсовой салфеткой со спиртом и выполнить качественный скол.',
-      'Завести кабель в муфту, выбрать свободное волокно и выполнить сварку.',
-      'После проверки уложить запас волокна и защищённое соединение аккуратно в кассету.'
-    ],note:'Рабочее место должно быть защищено от ветра и осадков; мусор и обрезки волокна сразу убираются.'},
-    terms:{title:'Термины',text:'Короткие пояснения для быстрого чтения заявки и работы на объекте.',items:[
-      '<strong>АП</strong> — абонентская плата.',
-      '<strong>МО ЧС</strong> — Московская область, частный сектор.',
-      '<strong>0+4000</strong> — 0 ₽ за подключение + 4000 ₽ на счёт.',
-      '<strong>Регистрация</strong> — передача данных после включения абонентского модема для получения параметров подключения.',
-      '<strong>Рабочая карта</strong> — карта линий и объектов, используемая для ориентации на местности.'
-    ],note:'В учебном портале используем полные формулировки: «регистрация», «регистрационные данные», без внутренних сокращений и сленга.'}
+    'new-closure':{
+      kicker:'01 · НОВАЯ МУФТА',title:'Муфта варится с нуля',
+      text:'На карте такая муфта отмечена синим. Здесь важно сначала определить схему и свободные точки, а уже затем выполнять сварку.',
+      steps:[
+        'Открой <strong>Рабочую карту</strong> и найди ближайшую муфту по заявке.',
+        'Разбери муфту и определи свободное волокно. В рабочей схеме свободные концы сплиттера находятся в верхней кассете и размещены в свободных держателях.',
+        'Определи установленный сплиттер и подготовь кабель к вводу и сварке.',
+        'После сварки проверь сигнал и занеси в отчёт входной сигнал, установленные сплиттеры, переходные и конечные значения.',
+        'Приложи фото муфты и проверь, что состояние объекта на карте соответствует фактическому.'
+      ],note:'Синяя муфта — новая. Итоговую схему всегда сверяем с фактическим объектом и измерениями.'
+    },
+    'existing-closure':{
+      kicker:'02 · РАНЕЕ СВАРЕНА',title:'Муфта уже подготовлена',
+      text:'Фиолетовая муфта уже сварена ранее. В этом сценарии основной контроль — уровень сигнала, который уходит к абоненту.',
+      steps:[
+        'Открой объект на карте и проверь, что муфта отмечена как ранее сваренная.',
+        'Найди свободное рабочее волокно и выполни подготовку к новой сварке.',
+        'После подключения абонента измерь сигнал, который приходит к абонентской стороне.',
+        'В отчёте зафиксируй результат измерения и приложи требуемое фото муфты.',
+        'Перед завершением заявки убедись, что фактическое состояние муфты и данные в карте не расходятся.'
+      ],note:'Фиолетовый цвет сам по себе не заменяет проверку: ориентируемся на фактическую схему и измеренный уровень сигнала.'
+    },
+    'full-closure':{
+      kicker:'03 · КРАСНАЯ МУФТА',title:'Свободных мест нет',
+      text:'Красная отметка означает, что свободных мест в муфте уже нет. Но это не означает автоматически, что нового абонента подключить нельзя.',
+      steps:[
+        'Определи рабочее волокно, по которому можно оценить запас оптической мощности.',
+        'Разомкни используемое волокно по принятой рабочей процедуре и выполни контрольное измерение через пигтейл.',
+        'Если запаса достаточно для деления <strong>50/50</strong>, учитывай ориентировочную потерю около 3 дБ и обязательно проверь фактический результат измерением.',
+        'Если запаса для 50/50 недостаточно, по принятой схеме можно использовать <strong>10/90</strong> перед основным 1×8 или 1×4: небольшая доля уходит новому абоненту, основная — в существующую ветку.',
+        'После подключения снова проверь уровень и только затем фиксируй результат в отчёте.'
+      ],note:'Решение принимается по измерению сигнала, а не только по цвету муфты на карте.'
+    },
+    'low-signal':{
+      kicker:'04 · КОНТРОЛЬ СИГНАЛА',title:'Сигнал ниже ожидаемого',
+      text:'Используй диапазон как быструю оценку результата, а причину ищи по фактической схеме линии и качеству соединений.',
+      steps:[
+        '<strong>−8…−25 дБ</strong> — нормальный рабочий диапазон.',
+        '<strong>−25…−27 дБ</strong> — пограничное значение: перепроверь сварку, соединения и фактическую схему.',
+        '<strong>ниже −27 дБ</strong> — слабый сигнал: не завершай работу только по одному показанию, ищи причину роста потерь.',
+        'Проверь качество скола, чистоту волокна, положение КДЗС, соединения и соответствие установленного сплиттера фактической схеме.',
+        'После устранения причины повтори измерение и зафиксируй итоговый результат.'
+      ],metric:true,note:'Диапазоны используются как рабочая шкала, предоставленная для обучения. При спорном результате ориентируйся на действующую внутреннюю инструкцию и фактическое измерение.'
+    },
+    'welding':{
+      kicker:'05 · СВАРКА',title:'Подготовка → сварка → КДЗС',
+      text:'Короткий алгоритм для самого процесса сварки. Рабочее место должно быть защищено от ветра и осадков, а все обрезки волокна — сразу убраны.',
+      steps:[
+        'Надень <strong>КДЗС</strong> на выбранное волокно до начала подготовки.',
+        'Зафиксируй кабель, зачисти волокно и удали остатки гидрофобного заполнителя с рабочей зоны.',
+        'Сними защитное покрытие стриппером, очисти волокно безворсовой салфеткой со спиртом и выполни качественный скол.',
+        'Не касайся торца сколотого волокна руками или загрязнёнными поверхностями. Помести волокно в сварочник и выполни сварку с закрытой ветрозащитой.',
+        'После сварки отцентрируй КДЗС над местом соединения, прогрей и дай полностью остыть перед укладкой в кассету.'
+      ],note:'Типовые причины проблем: плохой скол, загрязнение, неправильная зачистка и неправильное положение КДЗС. Оценку потерь со сварочника используем как контрольный ориентир, а не как замену измерению линии.'
+    },
+    'report':{
+      kicker:'06 · ЗАВЕРШЕНИЕ',title:'Заявку нужно правильно закрыть',
+      text:'Сварка — только часть работы. После подключения нужно передать результат в рабочие системы и проверить абонентское оборудование.',
+      steps:[
+        'После сварки в муфте открой заявку в <strong>ТехПортале</strong> и заполни соответствующий отчёт.',
+        'Для новой муфты укажи входной сигнал, установленные сплиттеры, переходные и конечные значения. Для ранее сваренной — зафиксируй сигнал, уходящий к абоненту.',
+        'Приложи фото муфты и укажи оставшиеся свободные места, если это предусмотрено формой отчёта.',
+        'После подключения абонентского модема отправь сообщение в <strong>pongroup</strong> для регистрации абонента. В ответ получишь параметры, необходимые для завершения подключения и настройки оборудования.',
+        'Настрой роутер, проверь интернет с абонентом, затем договор и расчёт. После этого можно переходить к следующему адресу.'
+      ],note:'Последовательность: регистрация → получение параметров → настройка роутера → проверка интернета → договор → расчёт → следующий адрес.'
+    }
    };
-   const detail=legacy.querySelector('#v11-ref-detail');
+   const detail=legacy.querySelector('#v11-situation-detail');
    function render(key,shouldScroll){
-     const d=data[key]||data.signal;
-     detail.innerHTML=`<div class="v11-ref-detail-inner"><h3>${d.title}</h3><p>${d.text}</p><ul class="v11-ref-list">${d.items.map(x=>`<li>${x}</li>`).join('')}</ul><p class="v11-ref-note">${d.note}</p></div>`;
-     legacy.querySelectorAll('.v11-ref-card').forEach(b=>b.classList.toggle('is-active',b.dataset.ref===key));
+     const d=data[key]||data['new-closure'];
+     const metrics=d.metric?'<div class="v11-detail-metric"><div class="v11-metric"><strong>−8…−25 дБ</strong><span>Нормальный рабочий диапазон</span></div><div class="v11-metric"><strong>−25…−27 дБ</strong><span>Пограничное значение</span></div><div class="v11-metric"><strong>ниже −27 дБ</strong><span>Слабый сигнал</span></div></div>':'';
+     detail.innerHTML=`<div class="v11-detail-top"><div class="v11-detail-kicker">${d.kicker}</div><h3>${d.title}</h3><p>${d.text}</p></div><div class="v11-detail-body"><ol class="v11-detail-steps">${d.steps.map(x=>`<li class="v11-detail-step"><span>${x}</span></li>`).join('')}</ol>${metrics}<div class="v11-detail-note"><b>Важно:</b> ${d.note}</div></div>`;
+     legacy.querySelectorAll('.v11-situation').forEach(b=>b.classList.toggle('is-active',b.dataset.situation===key));
      detail.classList.add('is-open');
      if(shouldScroll && window.innerWidth<=800){
-       requestAnimationFrame(()=>detail.scrollIntoView({behavior:'smooth',block:'nearest'}));
+       requestAnimationFrame(()=>detail.scrollIntoView({behavior:'smooth',block:'start'}));
      }
    }
-   legacy.querySelectorAll('.v11-ref-card').forEach(b=>b.addEventListener('click',()=>render(b.dataset.ref,true)));
-   render('signal',false);
+   legacy.querySelectorAll('.v11-situation').forEach(b=>b.addEventListener('click',()=>render(b.dataset.situation,true)));
+   render('new-closure',false);
  }
 
  // move existing sections into pages
