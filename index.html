@@ -123,6 +123,43 @@ footer{background:#09261f}footer p{color:#8da69f}
 .day-section{border-color:var(--line)}
 .mobile-menu{border-color:var(--line);box-shadow:0 12px 30px rgba(13,47,40,.14)}.mobile-menu a{color:var(--deep);border-color:#e5efec}.mobile-menu a:hover{background:var(--soft-sea)}
 @media(max-width:520px){.hero h1{font-size:50px}.top{height:70px}.mobile-menu{top:70px}}
+
+/* v0.9 — role-specific knowledge sections */
+.specialties{background:#eef8f5}
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.role-card{background:#fff;border:1px solid #dce8e5;border-radius:18px;padding:28px;min-height:220px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 12px 30px #0a5c4a0b}
+.role-card.active{background:linear-gradient(135deg,#073f3a 0%,#075f55 72%,#0c8f78 100%);color:#fff;border-color:#075f55}
+.role-card .role-icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:#dff7ee;color:#087a64;font-size:22px;margin-bottom:18px}
+.role-card.active .role-icon{background:#d9ff45;color:#073f3a}
+.role-card .role-label{font-size:10px;letter-spacing:.16em;font-weight:800;color:#087a64}
+.role-card.active .role-label{color:#d9ff45}
+.role-card h3{font-size:25px;margin:8px 0}
+.role-card p{font-size:13px;line-height:1.55;color:#687976;margin:0 0 20px;max-width:620px}
+.role-card.active p{color:#d6e6e2}
+.role-card a{margin-top:auto;display:inline-block;text-decoration:none;border-radius:9px;padding:11px 15px;background:#087a64;color:#fff;font-size:12px;font-weight:700}
+.role-card.active a{background:#d9ff45;color:#073f3a}
+.role-card.disabled{opacity:.78}
+.role-card.disabled .role-icon{background:#f0f2f1;color:#687976}
+.welder-reference{background:#f7fbf9;border:1px solid #dce9e5;border-radius:20px;padding:30px;margin-top:22px}
+.welder-reference h3{font-size:25px;margin:0 0 9px;color:#073f3a}
+.welder-reference .lead{max-width:850px;margin-bottom:24px}
+.ref-table-wrap{overflow-x:auto;border:1px solid #dce5e2;border-radius:13px;background:#fff}
+.ref-table{width:100%;border-collapse:collapse;min-width:760px;font-size:13px}
+.ref-table th{background:#e6f5f0;color:#073f3a;text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:13px 14px;border-bottom:1px solid #dce5e2}
+.ref-table td{padding:12px 14px;border-bottom:1px solid #edf1ef;color:#394a46;vertical-align:top}
+.ref-table tr:last-child td{border-bottom:0}
+.ref-table td:first-child{font-weight:800;color:#075f55;white-space:nowrap}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:22px}
+.info-card{background:#fff;border:1px solid #dfe9e6;border-radius:15px;padding:22px}
+.info-card h4{margin:0 0 9px;font-size:17px;color:#073f3a}
+.info-card p{margin:0;color:#5b6b67;line-height:1.6;font-size:13px}
+.signal-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.signal-band{border-radius:11px;padding:14px 12px}
+.signal-band strong{display:block;font-size:17px;margin-bottom:4px}
+.signal-band span{font-size:11px;line-height:1.35}
+.signal-good{background:#e3f7ec;color:#146b48}.signal-edge{background:#fff4d9;color:#8a6415}.signal-low{background:#fde7e7;color:#9a3434}
+.note{margin-top:16px;padding:15px 17px;border-radius:12px;background:#eaf7f3;color:#41615a;font-size:12px;line-height:1.55;border-left:4px solid #0a8b72}
+@media(max-width:800px){.role-grid,.info-grid{grid-template-columns:1fr}.ref-table{min-width:700px}.signal-scale{grid-template-columns:1fr}}
 </style>
 
 
@@ -183,15 +220,129 @@ footer{background:#09261f}footer p{color:#8da69f}
   .workflow{grid-template-columns:1fr 1fr}
 }
 </style>
+
+<style id="v1-architecture-css">
+:root{
+ --v1-deep:#064b49;--v1-deeper:#033d3b;--v1-teal:#11a99a;--v1-breeze:#dff7f3;
+ --v1-lime:#b7ef45;--v1-bg:#f4f9f8;--v1-card:#fff;--v1-ink:#0c3e40;--v1-muted:#648084;
+ --v1-line:#dcebea;--v1-shadow:0 12px 35px rgba(5,72,69,.08)
+}
+body.v1{background:var(--v1-bg);color:var(--v1-ink)}
+body.v1 .top,body.v1>footer{display:none!important}
+.v1-shell{min-height:100vh;display:flex}
+.v1-side{width:250px;flex:0 0 250px;background:linear-gradient(180deg,var(--v1-deep),var(--v1-deeper));color:#fff;position:fixed;inset:0 auto 0 0;z-index:100;display:flex;flex-direction:column;padding:25px 14px;overflow:auto}
+.v1-brand{display:flex;align-items:center;gap:11px;padding:0 12px 28px}
+.v1-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--v1-lime),#56d9b9);color:var(--v1-deeper);font-weight:900;display:grid;place-items:center;font-size:14px}
+.v1-brand strong{font-size:16px}.v1-brand small{display:block;color:#b8d9d5;font-size:11px;margin-top:3px}
+.v1-nav{display:grid;gap:5px}.v1-nav button{appearance:none;border:0;background:transparent;color:#d8eeeb;text-align:left;border-radius:12px;padding:13px 13px;cursor:pointer;font-size:14px;display:flex;gap:11px;align-items:center}.v1-nav button:hover{background:rgba(255,255,255,.08)}.v1-nav button.active{background:linear-gradient(90deg,rgba(17,169,154,.95),rgba(17,169,154,.55));color:#fff;box-shadow:inset 3px 0 var(--v1-lime)}.v1-nav .ico{width:24px;text-align:center;font-size:17px}
+.v1-side-bottom{margin-top:auto;padding:15px 12px 4px;color:#9ec7c3;font-size:11px;line-height:1.5}
+.v1-main{margin-left:250px;width:calc(100% - 250px);min-width:0}
+.v1-mobilebar{display:none}
+.v1-page{display:none;max-width:1320px;margin:0 auto;padding:38px clamp(20px,4vw,55px) 80px}.v1-page.active{display:block}
+.v1-page-head{margin-bottom:28px}.v1-kicker{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--v1-teal);margin-bottom:8px}.v1-page-head h1{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.05;color:var(--v1-deep)}.v1-page-head p{max-width:760px;color:var(--v1-muted);line-height:1.65;margin:12px 0 0}
+.v1-section-wrap{background:transparent}
+.v1-home-intro{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;margin-bottom:25px}.v1-home-card{background:var(--v1-card);border:1px solid var(--v1-line);border-radius:24px;padding:30px;box-shadow:var(--v1-shadow)}.v1-home-card.primary{background:linear-gradient(135deg,#e5faf5,#f8ffef);border-color:#cbece5}.v1-home-card h2{margin:0 0 9px;color:var(--v1-deep);font-size:28px}.v1-home-card p{color:var(--v1-muted);line-height:1.65}
+.v1-paths{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.v1-path{border:1px solid var(--v1-line);border-radius:17px;padding:18px;background:#fff;cursor:pointer;text-align:left}.v1-path:hover{border-color:#9bded4;transform:translateY(-1px)}.v1-path b{display:block;margin-bottom:6px}.v1-path span{font-size:12px;color:var(--v1-muted);line-height:1.5}
+.v1-page section{scroll-margin-top:20px}.v1-page>.section,.v1-page>.stats,.v1-page>.test{margin-left:0!important;margin-right:0!important}
+.v1-page>.section{max-width:none!important;padding-left:0!important;padding-right:0!important}
+.v1-page>.stats{max-width:none!important}
+.v1-role-banner{background:linear-gradient(135deg,var(--v1-deep),#0b7169);color:white;border-radius:22px;padding:24px 27px;margin:0 0 24px;display:flex;justify-content:space-between;gap:20px;align-items:center}.v1-role-banner b{font-size:20px}.v1-role-banner span{color:#c9ebe6;font-size:13px;line-height:1.5}
+.v1-role-badge{background:var(--v1-lime);color:var(--v1-deeper);border-radius:999px;padding:8px 12px;font-weight:800;font-size:11px;white-space:nowrap}
+.v1-progress-box{background:#fff;border:1px solid var(--v1-line);border-radius:20px;padding:22px;box-shadow:var(--v1-shadow)}.v1-progress-box .bar{height:9px;background:#e3efed;border-radius:99px;overflow:hidden}.v1-progress-box .bar i{display:block;width:38%;height:100%;background:linear-gradient(90deg,var(--v1-teal),var(--v1-lime));border-radius:99px}
+.v1-empty{background:#fff;border:1px dashed #b8d5d1;border-radius:22px;padding:32px;text-align:center;color:var(--v1-muted)}.v1-empty strong{display:block;color:var(--v1-deep);font-size:20px;margin-bottom:8px}
+.v1-page .section-head{max-width:none!important}.v1-page .grid{max-width:none!important}
+@media(max-width:900px){
+ .v1-side{transform:translateX(-105%);transition:transform .22s ease;width:275px;box-shadow:15px 0 45px rgba(0,0,0,.16)}body.v1.menu-open .v1-side{transform:translateX(0)}
+ .v1-main{margin-left:0;width:100%;padding-top:62px}.v1-mobilebar{display:flex;position:fixed;top:0;left:0;right:0;height:62px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--v1-line);z-index:90;align-items:center;justify-content:space-between;padding:0 15px}.v1-mobilebar button{border:0;background:var(--v1-breeze);color:var(--v1-deep);width:40px;height:40px;border-radius:12px;font-size:20px}.v1-mobilebrand{font-weight:900;color:var(--v1-deep);font-size:15px}.v1-mobilebrand span{color:var(--v1-teal)}
+ .v1-page{padding:24px 15px 55px}.v1-page-head{margin-bottom:20px}.v1-page-head h1{font-size:32px}.v1-home-intro{grid-template-columns:1fr}.v1-paths{grid-template-columns:1fr}.v1-role-banner{align-items:flex-start;flex-direction:column}.v1-page .section{padding-top:28px!important;padding-bottom:28px!important}
+ .v1-side-overlay{display:block;position:fixed;inset:0;background:rgba(0,30,30,.35);z-index:95;opacity:0;pointer-events:none;transition:.2s}.v1-side-overlay.show{opacity:1;pointer-events:auto}
+}
+@media(min-width:901px){.v1-side-overlay{display:none}}
+</style>
 </head>
 <body>
-<header class="top"><div class="brand"><div class="mark">ТС</div><div><b>ТОЧКА СВЯЗИ</b><span>ACADEMY</span></div></div><nav><a href="#home">Главная</a><a href="#learn">Обучение</a><a href="#reference">Справочник</a><a href="#first-day">Первый день</a><a href="#field">Работа на объекте</a><a href="#diagnostics">Диагностика</a></nav><button class="menu" data-action="toggleMenu">☰</button></header>
+<header class="top"><div class="brand"><div class="mark">ТС</div><div><b>ТОЧКА СВЯЗИ</b><span>ACADEMY</span></div></div><nav><a href="#home">Главная</a><a href="#learn">Обучение</a><a href="#reference">Справочник</a><a href="#first-day">Первый день</a><a href="#field">Работа на объекте</a><a href="#specialties">Для сотрудников</a><a href="#diagnostics">Диагностика</a></nav><button class="menu" data-action="toggleMenu">☰</button></header>
 <main id="home">
 <section class="hero"><div class="hero-copy"><div class="eyebrow">ВНУТРЕННИЙ ПОРТАЛ</div><h1>ВОЛС без лишних<br><em>вопросов.</em></h1><p>Обучение, инструкции и помощь монтажнику прямо на объекте. От первых шагов до самостоятельной работы.</p><div class="search"><span>⌕</span><input id="search" placeholder="Что нужно найти? Например: плохой скол" data-search-input="true"><kbd>⌘ K</kbd></div><div class="quick"><button data-action="go" data-id="learn">Начать обучение →</button><button class="ghost" data-action="go" data-id="checklists">Чек-листы</button></div></div><div class="hero-card"><div class="card-label">ТРАЕКТОРИЯ НОВИЧКА</div><div class="progress"><div><strong>2</strong><span>из 8 этапов</span></div><div class="bar"><i style="width:25%"></i></div></div><ol><li class="done">Основы ВОЛС</li><li class="done">Инструмент</li><li>Подготовка кабеля</li><li>Сварка волокна</li><li>Муфты и кассеты</li><li>Измерения</li><li>Диагностика</li><li>Итоговый тест</li></ol></div></section>
 <section class="stats"><div><b>01</b><span>Обучение<br>с нуля</span></div><div><b>24/7</b><span>Помощь<br>на объекте</span></div><div><b>∞</b><span>База знаний<br>компании</span></div><div><b>100%</b><span>Адаптация<br>под телефон</span></div></section>
 <section id="learn" class="section"><div class="section-head"><div><div class="eyebrow">ПУТЬ МОНТАЖНИКА</div><h2>Обучение</h2></div><p>Последовательно пройдите основные этапы работы и закрепите знания тестами.</p></div><div class="grid courses"><article class="course safety"><div class="icon">⚠</div><span>СТАРТ</span><h3>Безопасность</h3><p>Оптическое излучение, осколки волокна, оборудование и правила работы на объекте.</p><button data-action="openLesson" data-name="Безопасность">Открыть →</button></article><article class="course featured"><div class="icon">⌁</div><span>УРОВЕНЬ 01</span><h3>Основы ВОЛС</h3><p>Как устроена оптическая линия, какие бывают кабели, волокна, модули и элементы сети.</p><button data-action="openLesson" data-name="Основы ВОЛС">Открыть курс →</button></article><article class="course"><div class="icon">⚒</div><span>УРОВЕНЬ 02</span><h3>Инструмент</h3><p>Сварочник, скалыватель, стриппер, ТСД, рефлектометр и расходные материалы.</p><button data-action="openLesson" data-name="Инструмент">Открыть →</button></article><article class="course"><div class="icon">◌</div><span>УРОВЕНЬ 03</span><h3>Подготовка кабеля</h3><p>Вскрытие, работа с модулями, идентификация волокон, зачистка и скол.</p><button data-action="openLesson" data-name="Подготовка кабеля">Открыть →</button></article><article class="course"><div class="icon">✦</div><span>УРОВЕНЬ 04</span><h3>Сварка ВОЛС</h3><p>Полный алгоритм сварки и контроль качества соединения.</p><button data-action="openLesson" data-name="Сварка ВОЛС">Открыть →</button></article><article class="course"><div class="icon">▣</div><span>УРОВЕНЬ 05</span><h3>Муфты и кассеты</h3><p>Укладка, запас волокна, маркировка и аккуратная сборка.</p><button data-action="openLesson" data-name="Муфты и кассеты">Открыть →</button></article><article class="course"><div class="icon">◫</div><span>УРОВЕНЬ 06</span><h3>Измерения</h3><p>OTDR, измеритель мощности, референсные измерения и интерпретация результатов.</p><button data-action="openLesson" data-name="Измерения">Открыть →</button></article></div></section>
 <section id="reference" class="dark section"><div class="section-head"><div><div class="eyebrow">БЫСТРЫЙ ДОСТУП</div><h2>Справочник</h2></div><p>Нужна конкретная информация? Выберите категорию.</p></div><div class="ref-grid"><button data-action="toast" data-text="Открыт справочник по волокнам"><b>Волокно</b><span>типы, покрытия, цветовая маркировка</span>→</button><button data-action="toast" data-text="Открыт справочник по кабелям"><b>Кабели</b><span>конструкции и варианты прокладки</span>→</button><button data-action="toast" data-text="Открыт справочник по коннекторам"><b>Коннекторы</b><span>SC, LC и другие типы</span>→</button><button data-action="toast" data-text="Открыт справочник по параметрам"><b>Параметры</b><span>потери, затухание, нормы контроля</span>→</button><button data-action="toast" data-text="Открыта база оборудования"><b>Оборудование</b><span>инструкции по конкретным моделям</span>→</button><button data-action="toast" data-text="Открыты термины"><b>Термины</b><span>словарь монтажника</span>→</button></div></section>
 
+
+
+<section id="specialties" class="section specialties">
+  <div class="section-head">
+    <div><div class="eyebrow">СПЕЦИАЛЬНЫЕ РАЗДЕЛЫ</div><h2>Для сотрудников</h2></div>
+    <p>Отдельные материалы по ролям. Здесь собраны рабочие подсказки, которые нужны непосредственно на объекте.</p>
+  </div>
+  <div class="role-grid">
+    <article class="role-card active">
+      <div class="role-icon">⌁</div><div class="role-label">РАЗДЕЛ ДОСТУПЕН</div>
+      <h3>Для сварщика</h3>
+      <p>Определение сплитера в новой муфте, работа с занятыми муфтами и контроль уровня оптического сигнала на терминале.</p>
+      <a href="#welder-reference">Открыть справочник →</a>
+    </article>
+    <article class="role-card disabled">
+      <div class="role-icon">⚒</div><div class="role-label">СЛЕДУЮЩИЙ РАЗДЕЛ</div>
+      <h3>Для монтажника</h3>
+      <p>Практические материалы по прокладке кабеля, креплению на опорах, вводу в дом и взаимодействию со сварщиком.</p>
+      <span style="margin-top:auto;font-size:12px;color:#687976;font-weight:700">Готовится</span>
+    </article>
+  </div>
+</section>
+
+<section id="welder-reference" class="section">
+  <div class="section-head">
+    <div><div class="eyebrow">ДЛЯ СВАРЩИКА</div><h2>Рабочий справочник</h2></div>
+    <p>Короткие практические правила для работы с новой муфтой, сплитерами и уровнем сигнала.</p>
+  </div>
+
+  <article class="welder-reference">
+    <h3>Определение сплитера в новой муфте</h3>
+    <p class="lead">Ниже приведена рабочая таблица сочетаний. Она помогает сориентироваться, какой вариант деления использовать в зависимости от значения, указанного в строке. Таблицу используем как справочник, а итоговое решение обязательно сверяем с фактическим измерением сигнала на объекте.</p>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Сплитер</th><th>Значение</th><th>Допустимые варианты</th></tr></thead>
+        <tbody>
+          <tr><td>2_1×8</td><td>−6</td><td>50/50 → 1/8</td></tr>
+          <tr><td>3_1×8</td><td>−5</td><td>30/70 → 1/2 → 1/8</td></tr>
+          <tr><td>4_1×8</td><td>−4</td><td>20/80 → 30/70 → 1/2 → 1/8</td></tr>
+          <tr><td>5_1×8</td><td>−3</td><td>20/80 → 25/75 → 30/70 → 1/2 → 1/8</td></tr>
+          <tr><td>6_1×8</td><td>−2,5</td><td>15/85 → 20/80 → 25/75 → 30/70 → 1/2 → 1/8</td></tr>
+          <tr><td>7_1×8</td><td>−2</td><td>14/86 → 18/82 → 20/80 → 25/75 → 35/65 → 1/2 → 1/8</td></tr>
+          <tr><td>8_1×8</td><td>−1</td><td>12/88 → 14/86 → 17/83 → 20/80 → 25/75 → 35/65 → 1×2 → 1/8</td></tr>
+          <tr><td>9_1×8</td><td>0</td><td>10/90 → 12/88 → 14/86 → 16/84 → 20/80 → 25/75 → 30/70 → 1×2 → 1/8</td></tr>
+          <tr><td>10_1×8</td><td>+1</td><td>8/92 → 9/91 → 10/90 → 11/89 → 13/87 → 15/85 → 20/80 → 25/75 → 1×2 → 1/8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>Важно:</b> это рабочая таблица для ориентира, а не замена измерению. При выборе схемы учитываем реальный уровень сигнала и проверяем результат измерением после подключения.</div>
+  </article>
+
+  <div class="info-grid">
+    <article class="info-card">
+      <h4>Красная муфта — это не запрет на подключение</h4>
+      <p>Красная отметка означает, что свободных мест в муфте уже нет и её нужно учитывать при дальнейшем планировании. Но это не означает, что подключение невозможно. Сначала нужно определить, какой сигнал приходит по доступному рабочему волокну, и только после измерения выбирать схему подключения.</p>
+      <div class="note"><b>Порядок:</b> идентифицировать рабочее волокно → выполнить контрольное измерение через пигтейл по принятой процедуре → оценить запас по мощности → выбрать схему деления → повторно проверить уровень.</div>
+    </article>
+    <article class="info-card">
+      <h4>Если запаса около 3 дБ недостаточно</h4>
+      <p>Если по измерению нет достаточного запаса для прямого деления 50/50, по принятой рабочей схеме можно использовать предварительное деление 10/90 перед основным сплиттером 1×8 или 1×4: 10% отводится на нового абонента, а 90% продолжается на основной сплиттер.</p>
+      <div class="note"><b>50/50:</b> ориентировочная потеря на идеальном делении — около 3 дБ. Фактический результат зависит от установленного компонента и состояния линии, поэтому ориентируемся на измерение.</div>
+    </article>
+  </div>
+
+  <article class="welder-reference" style="margin-top:15px">
+    <h3>Норма сигнала на терминале</h3>
+    <p class="lead">Для быстрой оценки результата используем три диапазона.</p>
+    <div class="signal-scale">
+      <div class="signal-band signal-good"><strong>−8…−25 дБ</strong><span>Нормальный рабочий диапазон.</span></div>
+      <div class="signal-band signal-edge"><strong>−25…−27 дБ</strong><span>Пограничное значение — требуется внимательная проверка.</span></div>
+      <div class="signal-band signal-low"><strong>ниже −27 дБ</strong><span>Сигнал слабый, необходимо искать причину и проверять линию.</span></div>
+    </div>
+    <div class="note"><b>Не забываем:</b> при пограничных и слабых значениях не делаем вывод только по одному числу — проверяем качество сварки, состояние соединений и соответствие фактической схеме линии.</div>
+  </article>
+</section>
 
 <section id="first-day" class="section day-section">
   <div class="section-head"><div><div class="eyebrow">АДАПТАЦИЯ НОВИЧКА</div><h2>Первый рабочий день</h2></div><p>Практический сценарий от получения заявки до следующего адреса. Нажмите на этап, чтобы увидеть, что именно делает сварщик и монтажник.</p></div>
@@ -297,7 +448,7 @@ UTM5 для платежей: [выдан системой]
 <section id="diagnostics" class="section"><div class="section-head"><div><div class="eyebrow">ЕСЛИ ЧТО-ТО ПОШЛО НЕ ТАК</div><h2>Диагностика</h2></div><p>Выберите проблему — портал подскажет, что проверить первым.</p></div><div class="problems"><button data-action="diagnose" data-name="Плохая сварка"><i>01</i><b>Плохая сварка</b><span>Потери выше ожидаемых</span></button><button data-action="diagnose" data-name="Не сваривает"><i>02</i><b>Не сваривает</b><span>Ошибка или сбой аппарата</span></button><button data-action="diagnose" data-name="Проблема с измерением"><i>03</i><b>Проблема с измерением</b><span>OTDR / мощность / рефлектограмма</span></button><button data-action="diagnose" data-name="Нет сигнала"><i>04</i><b>Нет сигнала</b><span>От узла до абонента</span></button></div></section>
 <section id="checklists" class="section checklist"><div><div class="eyebrow">ПЕРЕД РАБОТОЙ</div><h2>Чек-лист сварщика</h2><p>Отметьте пункты перед началом работ.</p></div><div class="checkbox"><label><input type="checkbox"> Рабочее место подготовлено</label><label><input type="checkbox"> Средства защиты и условия работы проверены</label><label><input type="checkbox"> Сварочный аппарат проверен</label><label><input type="checkbox"> Электроды и расходники в порядке</label><label><input type="checkbox"> Скалыватель и стриппер чистые и исправные</label><label><input type="checkbox"> Рабочая зона сварочника очищена</label><label><input type="checkbox"> Волокно идентифицировано и подготовлено</label><label><input type="checkbox"> Документация и маркировка проверены</label><button data-action="finishChecklist">Завершить проверку</button></div></section>
 <section class="test"><div><div class="eyebrow">ПРОВЕРЬТЕ СЕБЯ</div><h2>Мини-тест</h2><p>Первый вопрос из будущего экзамена монтажника.</p></div><div class="question"><b>Что обязательно сделать перед укладкой волокна в сварочный аппарат?</b><button data-action="answer" data-ok="false">Просто снять покрытие</button><button data-action="answer" data-ok="true">Очистить волокно и выполнить качественный скол</button><button data-action="answer" data-ok="false">Нагреть волокно</button><div id="answer"></div></div></section>
-</main><footer><div class="brand"><div class="mark">ТС</div><div><b>ТОЧКА СВЯЗИ</b><span>ACADEMY</span></div></div><p>Внутренний учебный портал. Версия учебного прототипа 0.8 · база знаний формируется</p></footer>
+</main><footer><div class="brand"><div class="mark">ТС</div><div><b>ТОЧКА СВЯЗИ</b><span>ACADEMY</span></div></div><p>Внутренний учебный портал. Версия учебного прототипа 0.9 · база знаний формируется</p></footer>
 <div id="modal" class="modal" data-modal-backdrop="true"><div class="modal-box"><button class="x" data-action="closeModal">×</button><div id="modalContent"></div></div></div>
 <script>
 const lessons = {
@@ -420,7 +571,7 @@ function toggleMenu(){
   let m=document.getElementById('mobileMenu');
   if(!m){
     m=document.createElement('div'); m.id='mobileMenu'; m.className='mobile-menu';
-    m.innerHTML='<a href="#home">Главная</a><a href="#learn">Обучение</a><a href="#reference">Справочник</a><a href="#first-day">Первый день</a><a href="#field">Работа на объекте</a><a href="#diagnostics">Диагностика</a>';
+    m.innerHTML='<a href="#home">Главная</a><a href="#learn">Обучение</a><a href="#reference">Справочник</a><a href="#first-day">Первый день</a><a href="#field">Работа на объекте</a><a href="#specialties">Для сотрудников</a><a href="#diagnostics">Диагностика</a>';
     document.body.appendChild(m);
     m.addEventListener('click',e=>{ if(e.target.tagName==='A') m.classList.remove('show'); });
   }
@@ -567,7 +718,7 @@ document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLower
             var menu=byId('mobileMenu');
             if(!menu){
               menu=document.createElement('div'); menu.id='mobileMenu'; menu.className='mobile-menu';
-              menu.innerHTML='<a href="#home">Главная</a><a href="#learn">Обучение</a><a href="#reference">Справочник</a><a href="#first-day">Первый день</a><a href="#field">Работа на объекте</a><a href="#diagnostics">Диагностика</a>';
+              menu.innerHTML='<a href="#home">Главная</a><a href="#learn">Обучение</a><a href="#reference">Справочник</a><a href="#first-day">Первый день</a><a href="#field">Работа на объекте</a><a href="#specialties">Для сотрудников</a><a href="#diagnostics">Диагностика</a>';
               document.body.appendChild(menu);
             }
             menu.classList.toggle('show');
@@ -594,4 +745,102 @@ button,[data-action],.day-step,.ref-grid button,.problems button{ -webkit-user-s
 }
 </style>
 
+
+<script id="v1-architecture-js">
+(function(){
+function boot(){
+ const oldMain=document.getElementById('home');
+ if(!oldMain||document.querySelector('.v1-shell')) return;
+ document.body.classList.add('v1');
+
+ const sections=[...oldMain.children].filter(x=>x.tagName==='SECTION');
+ const byId=id=>sections.find(x=>x.id===id);
+
+ const shell=document.createElement('div'); shell.className='v1-shell';
+ const side=document.createElement('aside'); side.className='v1-side';
+ side.innerHTML=`
+  <div class="v1-brand"><div class="v1-mark">ТС</div><div><strong>Точка Связи</strong><small>Академия ВОЛС</small></div></div>
+  <nav class="v1-nav">
+   <button data-route="home" class="active"><span class="ico">⌂</span>Главная</button>
+   <button data-route="training"><span class="ico">▣</span>Обучение</button>
+   <button data-route="welder"><span class="ico">⚡</span>Для сварщика</button>
+   <button data-route="installer"><span class="ico">⌁</span>Для монтажника</button>
+   <button data-route="reference"><span class="ico">▤</span>Справочник</button>
+   <button data-route="tests"><span class="ico">✓</span>Тесты</button>
+   <button data-route="progress"><span class="ico">↗</span>Мой прогресс</button>
+  </nav>
+  <div class="v1-side-bottom">Внутренний учебный портал<br>монтажников и сварщиков ВОЛС</div>`;
+ const overlay=document.createElement('div'); overlay.className='v1-side-overlay';
+ const mobile=document.createElement('div'); mobile.className='v1-mobilebar';
+ mobile.innerHTML='<button data-menu>☰</button><div class="v1-mobilebrand">Точка <span>Связи</span> · Академия</div><button data-route="reference">⌕</button>';
+ const content=document.createElement('div'); content.className='v1-main';
+ oldMain.replaceWith(content);
+ document.body.insertBefore(shell,document.body.firstChild);
+ shell.append(side,content);
+ document.body.append(overlay,mobile);
+
+ const pages={};
+ function page(id,title,desc,kicker){
+   const p=document.createElement('section'); p.className='v1-page';p.dataset.page=id;
+   p.innerHTML=`<div class="v1-page-head"><div class="v1-kicker">${kicker||'АКАДЕМИЯ «ТОЧКА СВЯЗИ»'}</div><h1>${title}</h1><p>${desc}</p></div>`;
+   content.appendChild(p); pages[id]=p; return p;
+ }
+ page('home','Академия «Точка Связи»','Практическое обучение монтажников и сварщиков ВОЛС — от первого рабочего дня до самостоятельной работы на объекте.','ВНУТРЕННИЙ УЧЕБНЫЙ ПОРТАЛ');
+ page('training','Обучение','Последовательные уроки и сценарии, которые помогают пройти путь от новичка до самостоятельного специалиста.','ОБУЧЕНИЕ');
+ page('welder','Для сварщика','Рабочие инструкции, справочники и быстрые подсказки для сварщика ВОЛС.','СПЕЦИАЛЬНЫЙ РАЗДЕЛ');
+ page('installer','Для монтажника','Практика монтажника, подготовка к выезду, работа на трассе и взаимодействие со сварщиком.','СПЕЦИАЛЬНЫЙ РАЗДЕЛ');
+ page('reference','Справочник','Быстрый доступ к техническим данным, таблицам, нормам и рабочим подсказкам.','БЫСТРЫЙ ДОСТУП');
+ page('tests','Тесты','Проверьте знания после изучения материала и найдите темы, которые стоит повторить.','ПРОВЕРКА ЗНАНИЙ');
+ page('progress','Мой прогресс','Здесь будет собираться история обучения, пройденные уроки и результаты тестов.','ПРОГРЕСС');
+
+ // move existing sections into pages
+ function move(id,target){const el=byId(id); if(el) pages[target].appendChild(el)}
+ move('learn','training');
+ move('first-day','training');
+ move('welder-reference','welder');
+ move('diagnostics','welder');
+ move('checklists','welder');
+ move('field','installer');
+ move('specialties','home');
+ move('reference','reference');
+ move(null,'home');
+
+ // stats was a section without id; move it to home
+ const stats=sections.find(x=>x.classList.contains('stats')); if(stats) pages.home.appendChild(stats);
+ const hero=sections.find(x=>x.classList.contains('hero')); if(hero) pages.home.insertBefore(hero,pages.home.children[1]||null);
+
+ // Any remaining section not moved goes to reference, except test.
+ sections.forEach(el=>{
+   if(el.parentElement===oldMain) {
+     if(el.classList.contains('test')) pages.tests.appendChild(el); else pages.reference.appendChild(el);
+   }
+ });
+
+ // Helpful banners
+ pages.welder.insertBefore(Object.assign(document.createElement('div'),{className:'v1-role-banner',innerHTML:'<div><b>Рабочий раздел сварщика</b><br><span>Используйте его как быстрый справочник непосредственно перед или во время работы на объекте.</span></div><span class="v1-role-badge">СВАРЩИК</span>'}),pages.welder.children[1]||null);
+ pages.installer.insertBefore(Object.assign(document.createElement('div'),{className:'v1-role-banner',innerHTML:'<div><b>Рабочий раздел монтажника</b><br><span>Здесь будут собраны практические инструкции по монтажу и работе в паре со сварщиком.</span></div><span class="v1-role-badge">МОНТАЖНИК</span>'}),pages.installer.children[1]||null);
+ pages.progress.insertAdjacentHTML('beforeend','<div class="v1-progress-box"><b>Обучение</b><p style="color:var(--v1-muted)">В текущей версии прогресс сохраняется на уровне структуры портала. Персональный учёт можно подключить позже.</p><div class="bar"><i></i></div><small style="display:block;margin-top:9px;color:var(--v1-muted)">Подготовлено к дальнейшему расширению</small></div>');
+
+ function route(id){
+   id=pages[id]?id:'home';
+   Object.entries(pages).forEach(([k,p])=>p.classList.toggle('active',k===id));
+   side.querySelectorAll('[data-route]').forEach(b=>b.classList.toggle('active',b.dataset.route===id));
+   document.body.classList.remove('menu-open'); overlay.classList.remove('show');
+   window.scrollTo({top:0,behavior:'smooth'});
+   history.replaceState(null,'','#'+id);
+ }
+ side.addEventListener('click',e=>{const b=e.target.closest('[data-route]');if(b)route(b.dataset.route)});
+ mobile.addEventListener('click',e=>{const b=e.target.closest('[data-route]');if(b)route(b.dataset.route); if(e.target.closest('[data-menu]')){document.body.classList.toggle('menu-open');overlay.classList.toggle('show')}});
+ overlay.addEventListener('click',()=>{document.body.classList.remove('menu-open');overlay.classList.remove('show')});
+ document.addEventListener('click',e=>{
+   const b=e.target.closest('[data-route]');
+   if(b && !side.contains(b) && !mobile.contains(b)) route(b.dataset.route);
+ });
+ window.addEventListener('hashchange',()=>route(location.hash.slice(1)));
+ const initial=location.hash.slice(1);
+ route(pages[initial]?initial:'home');
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
 </body></html>
