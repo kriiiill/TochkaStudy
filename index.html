@@ -558,7 +558,17 @@ const diagnostics = {
   }
 };
 
-function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+function go(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  const page=el.closest('.v1-page');
+  if(page && typeof window.__tsRoute==='function'){
+    window.__tsRoute(page.dataset.page);
+    requestAnimationFrame(()=>el.scrollIntoView({behavior:'smooth',block:'start'}));
+  }else{
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
 function openLesson(name){
   const x=lessons[name]; if(!x)return;
   const blocks=x.blocks.map(b=>`<div class="lesson-block"><h3>${b[0]}</h3><p>${b[1]}</p></div>`).join('');
@@ -959,6 +969,7 @@ function boot(){
    window.scrollTo({top:0,behavior:'smooth'});
    history.replaceState(null,'','#'+id);
  }
+ window.__tsRoute=route;
 /* v1.1 — полностью переработанный справочник: сценарии вместо карточек */
 const refData={
   newClosure:{label:'Новая муфта',color:'blue',intro:'Муфта варится с нуля. Сначала определяем схему, подготавливаем кабель и выполняем сварку.',steps:['Открой карту и определи новую муфту.','Проверь свободные волокна и установленный сплиттер.','Подготовь кабель: зачистка, очистка, скол.','Выполни сварку и механический контроль.','Размести КДЗС в кассете после полного охлаждения.','Заполни отчёт в ТехПортале и приложи фото.']},
