@@ -588,17 +588,43 @@ function searchSite(q){
   const input = document.getElementById('search');
   const box = document.getElementById('searchResults');
   if(!box) return;
-  const term = String(q || '').trim().toLowerCase().replace(/ё/g,'е');
 
+  const normalize = value => String(value || '')
+    .toLowerCase()
+    .replace(/ё/g,'е')
+    .replace(/[^а-яa-z0-9×+\-\s]/gi,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+
+  const term = normalize(q);
   if(term.length < 2){
     box.innerHTML='';
     box.classList.remove('show');
     return;
   }
 
+  // Для русского языка учитываем самые частые формы слов:
+  // «сигнал» → «сигнала/сигналы», «сплиттер» → «сплиттеры»,
+  // «муфта» → «муфты/муфтой» и т.д.
+  const forms = new Set([term]);
+  const last = term.slice(-1);
+  if(term.length >= 4){
+    if(last === 'а') forms.add(term.slice(0,-1) + '');
+    if(last === 'ы' || last === 'и') forms.add(term.slice(0,-1));
+    if(last === 'й') forms.add(term.slice(0,-1) + 'я');
+    if(last === 'я') forms.add(term.slice(0,-1) + 'й');
+  }
+
+  const matches = text => {
+    const hay = normalize(text);
+    for(const f of forms){
+      if(f && hay.includes(f)) return true;
+    }
+    return false;
+  };
+
   const results=[];
   const seen=new Set();
-  const normalize=t=>String(t||'').toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ').trim();
   const add=(title,text,action,meta)=>{
     const key=normalize(title)+'|'+(action||'');
     if(seen.has(key)) return;
@@ -606,29 +632,58 @@ function searchSite(q){
     results.push({title,text,action,meta});
   };
 
-  // 1. Курсы/уроки — открываем существующее модальное окно.
-  Object.keys(lessons || {}).forEach(name=>{
-    const x=lessons[name];
-    const hay=normalize([name,x.title,x.intro,(x.blocks||[]).map(b=>b.join(' ')).join(' ')].join(' '));
-    if(hay.includes(term)){
-      const block=(x.blocks||[]).find(b=>normalize(b.join(' ')).includes(term));
-      add(x.title || name, block ? block[1] : x.intro, 'lesson:'+name, 'Обучение');
-    }
-  });
+  // 1. Курсы и уроки.
+  if(typeof lessons !== 'undefined'){
+    Object.keys(lessons).forEach(name=>{
+      const x=lessons[name] || {};
+      const blocks=Array.isArray(x.blocks) ? x.blocks : [];
+      const hay=[name,x.title,x.intro,blocks.map(b=>Array.isArray(b)?b.join(' '):'').join(' ')].join(' ');
+      if(matches(hay)){
+        const block=blocks.find(b=>Array.isArray(b) && matches(b.join(' ')));
+        add(x.title || name, block ? block[1] : x.intro, 'lesson:'+name, 'Обучение');
+      }
+    });
+  }
 
-  // 2. Весь текст контентных секций страницы.
-  document.querySelectorAll('main section[id], main article').forEach(el=>{
-    if(el.closest('.search-results')) return;
-    const text=normalize(el.innerText || el.textContent);
-    if(!text.includes(term)) return;
-    const heading=el.querySelector('h1,h2,h3,h4');
-    const title=heading ? heading.textContent.trim() : (el.id || 'Раздел портала');
-    const raw=(el.innerText || el.textContent || '').replace(/\s+/g,' ').trim();
-    const pos=text.indexOf(term);
-    let excerpt=raw.slice(Math.max(0,pos-55),Math.min(raw.length,pos+term.length+95));
-    if(pos>55) excerpt='…'+excerpt;
-    if(pos+term.length+95<raw.length) excerpt+='…';
-    const target=el.id ? '#'+el.id : null;
+  // 2. Диагностика.
+  if(typeof diagnostics !== 'undefined'){
+    Object.keys(diagnostics).forEach(name=>{
+      const x=diagnostics[name] || {};
+      const hay=[name,x.title,(x.steps||[]).join(' '),x.note].join(' ');
+      if(matches(hay)){
+        const step=(x.steps||[]).find(step=>matches(step));
+        add(x.title || name, step || x.note, 'diagnose:'+name, 'Диагностика');
+      }
+    });
+  }
+
+  // 3. Реальный контент страницы.
+  // Не ограничиваемся только section/article: часть полезного материала
+  // находится во вложенных карточках, таблицах и шагах рабочего сценария.
+  const candidates=document.querySelectorAll('main section[id], main article, main .welder-reference, main .day-step, main .info-card, main .report-card, main table');
+  candidates.forEach(el=>{
+    const text=el.innerText || el.textContent || '';
+    if(!matches(text)) return;
+
+    const heading=el.querySelector('h1,h2,h3,h4,th');
+    const title=heading ? heading.textContent.trim() : (el.closest('section[id]')?.querySelector('h2,h3')?.textContent.trim() || 'Раздел портала');
+    const raw=text.replace(/\s+/g,' ').trim();
+    const normalizedRaw=normalize(raw);
+    let pos=-1;
+    for(const f of forms){
+      pos=normalizedRaw.indexOf(f);
+      if(pos>=0) break;
+    }
+    let excerpt=raw;
+    if(pos>=0){
+      const needle=[...forms].find(f=>normalizedRaw.indexOf(f)>=0) || term;
+      excerpt=raw.slice(Math.max(0,pos-65),Math.min(raw.length,pos+needle.length+120));
+      if(pos>65) excerpt='…'+excerpt;
+      if(pos+needle.length+120<raw.length) excerpt+='…';
+    }
+
+    const section=el.closest('section[id]');
+    const target=section ? '#'+section.id : (el.id ? '#'+el.id : null);
     if(target) add(title,excerpt,'target:'+target,'Раздел');
   });
 
@@ -639,14 +694,16 @@ function searchSite(q){
   }
 
   const limited=results.slice(0,8);
-  box.innerHTML=limited.map((r,i)=>`<button class="search-result" type="button" data-search-result="${i}"><span class="search-result-meta">${r.meta}</span><strong>${escapeSearch(r.title)}</strong><small>${escapeSearch(r.text)}</small></button>`).join('');
+  box.innerHTML=limited.map((r,i)=>`<button class="search-result" type="button" data-search-result="${i}"><span class="search-result-meta">${escapeSearch(r.meta)}</span><strong>${escapeSearch(r.title)}</strong><small>${escapeSearch(r.text)}</small></button>`).join('');
   box.classList.add('show');
+
   box.querySelectorAll('[data-search-result]').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const r=limited[Number(btn.dataset.searchResult)];
       box.classList.remove('show');
       if(input) input.blur();
       if(r.action.startsWith('lesson:')) openLesson(r.action.slice(7));
+      else if(r.action.startsWith('diagnose:')) diagnose(r.action.slice(9));
       else if(r.action.startsWith('target:')) document.querySelector(r.action.slice(7))?.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
