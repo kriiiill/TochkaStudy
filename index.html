@@ -417,13 +417,7 @@ UTM5 для платежей: [выдан системой]
 Плата / порт / ONU: [служебные параметры]</div><div class="regu-note">В реальной работе используйте только корпоративные каналы и правила хранения учётных данных.</div></div>
 </section>
 
-<section id="field" class="section field-section">
-  <div class="section-head">
-    <div><div class="eyebrow">РЕАЛЬНАЯ РАБОТА «ТОЧКИ СВЯЗИ»</div><h2>Работа на объекте</h2></div>
-    <p>От заявки и карты до отчёта после сварки. Этот блок отражает рабочий процесс монтажника в полях.</p>
-  </div>
 
-</section>
 
 <section id="diagnostics" class="section"><div class="section-head"><div><div class="eyebrow">ЕСЛИ ЧТО-ТО ПОШЛО НЕ ТАК</div><h2>Диагностика</h2></div><p>Выберите проблему — портал подскажет, что проверить первым.</p></div><div class="problems"><button data-action="diagnose" data-name="Плохая сварка"><i>01</i><b>Плохая сварка</b><span>Потери выше ожидаемых</span></button><button data-action="diagnose" data-name="Не сваривает"><i>02</i><b>Не сваривает</b><span>Ошибка или сбой аппарата</span></button><button data-action="diagnose" data-name="Проблема с измерением"><i>03</i><b>Проблема с измерением</b><span>OTDR / мощность / рефлектограмма</span></button><button data-action="diagnose" data-name="Нет сигнала"><i>04</i><b>Нет сигнала</b><span>От узла до абонента</span></button></div></section>
 <section id="checklists" class="section checklist"><div><div class="eyebrow">ПЕРЕД РАБОТОЙ</div><h2>Чек-лист сварщика</h2><p>Отметьте пункты перед началом работ.</p></div><div class="checkbox"><label><input type="checkbox"> Рабочее место подготовлено</label><label><input type="checkbox"> Средства защиты и условия работы проверены</label><label><input type="checkbox"> Сварочный аппарат проверен</label><label><input type="checkbox"> Электроды и расходники в порядке</label><label><input type="checkbox"> Скалыватель и стриппер чистые и исправные</label><label><input type="checkbox"> Рабочая зона сварочника очищена</label><label><input type="checkbox"> Волокно идентифицировано и подготовлено</label><label><input type="checkbox"> Документация и маркировка проверены</label><button data-action="finishChecklist">Завершить проверку</button></div></section>
@@ -1080,7 +1074,7 @@ move('installer-guide','installer');
 
  // Helpful banners
  pages.welder.insertBefore(Object.assign(document.createElement('div'),{className:'v1-role-banner',innerHTML:'<div><b>Рабочий раздел сварщика</b><br><span>Используйте его как быстрый справочник непосредственно перед или во время работы на объекте.</span></div><span class="v1-role-badge">СВАРЩИК</span>'}),pages.welder.children[1]||null);
- pages.installer.insertBefore(Object.assign(document.createElement('div'),{className:'v1-role-banner',innerHTML:'<div><b>Рабочий раздел монтажника</b><br><span>Здесь будут собраны практические инструкции по монтажу и работе в паре со сварщиком.</span></div><span class="v1-role-badge">МОНТАЖНИК</span>'}),pages.installer.children[1]||null);
+ // Для монтажника сразу показываем практические материалы без вводного баннера.
  pages.progress.insertAdjacentHTML('beforeend','<div class="v1-progress-box"><b>Обучение</b><p style="color:var(--v1-muted)">В текущей версии прогресс сохраняется на уровне структуры портала. Персональный учёт можно подключить позже.</p><div class="bar"><i></i></div><small style="display:block;margin-top:9px;color:var(--v1-muted)">Подготовлено к дальнейшему расширению</small></div>');
 
  function route(id){
