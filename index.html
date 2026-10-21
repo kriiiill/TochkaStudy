@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#741d36">
+<title>Наш разговор</title>
+<style>
+:root{
+  --wine:#741d36; --wine-deep:#4c1024; --wine-soft:#a94d68;
+  --pink:#f7dfe8; --pink-2:#fbeef2; --paper:#fffdfc; --ink:#21191b;
+  --muted:#88777c; --line:#eadde1; --white:#fff;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--pink-2);color:var(--ink);font-family:var(--sans)}
+body{min-height:100dvh}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,textarea:focus-visible{outline:3px solid #d58ca2;outline-offset:3px}
+.app{min-height:100dvh;max-width:780px;margin:0 auto;background:var(--paper);position:relative;overflow:hidden}
+.topbar{height:68px;padding:calc(env(safe-area-inset-top) + 12px) 22px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f1e8eb;background:rgba(255,253,252,.94)}
+.wordmark{font-family:var(--serif);font-size:17px;letter-spacing:.03em;color:var(--wine);font-weight:bold}
+.wordmark small{display:block;font:9px var(--sans);letter-spacing:.19em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.icon-btn{border:0;background:transparent;color:var(--wine);font-size:23px;width:42px;height:42px;border-radius:50%}
+main{padding:24px 22px 34px}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--wine-soft);font-weight:700}
+h1,h2,h3,p{margin-top:0}
+h1{font:clamp(38px,10vw,58px)/.98 var(--serif);letter-spacing:-.045em;margin:14px 0 14px;color:var(--wine-deep);font-weight:500}
+.intro{font-size:14px;line-height:1.65;color:#6f6064;max-width:440px;margin-bottom:25px}
+.cover{position:relative;min-height:170px;border-radius:27px;background:var(--pink);padding:24px 22px;margin:20px 0 26px;overflow:hidden;border:1px solid #f0cbd7}
+.cover:before,.cover:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.cover:before{width:190px;height:190px;right:-54px;top:-80px;background:radial-gradient(circle,#fff8fa 0 26%,#efb8ca 27% 48%,transparent 70%);opacity:.9}
+.cover:after{width:140px;height:140px;left:-70px;bottom:-90px;background:radial-gradient(circle,#fff8fa 0 20%,#eeb4c5 22% 52%,transparent 72%);opacity:.85}
+.cover .eyebrow,.cover h2,.cover p{position:relative;z-index:1}
+.cover h2{font:clamp(28px,7vw,40px)/1.02 var(--serif);max-width:330px;color:var(--wine-deep);font-weight:500;letter-spacing:-.035em;margin:16px 0 10px}
+.cover p{font-size:12px;color:#71505b;margin:0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 13px}
+.section-head h2{font:25px var(--serif);color:var(--wine-deep);margin:0}
+.small-note{font-size:11px;color:var(--muted)}
+.stage-list{display:grid;gap:12px}
+.stage-card{display:grid;grid-template-columns:58px 1fr 22px;gap:14px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:19px;padding:14px 14px;min-height:100px;color:inherit;transition:transform .18s,border-color .18s}
+.stage-card:active{transform:scale(.99)}
+.stage-card.done{border-color:#c88a9d;background:#fff9fb}
+.stage-number{height:58px;width:58px;border-radius:15px;background:var(--pink-2);display:grid;place-items:center;color:var(--wine);font:26px var(--serif)}
+.stage-card.done .stage-number{background:var(--wine);color:white}
+.stage-card h3{font:21px/1.05 var(--serif);font-weight:500;color:var(--wine-deep);margin:0 0 6px}
+.stage-card p{font-size:12px;line-height:1.4;color:var(--muted);margin:0}
+.arrow{font-size:24px;color:var(--wine-soft)}
+.progress-wrap{margin:22px 0 8px}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}
+.track{height:4px;background:#f0e4e8;border-radius:9px;overflow:hidden}
+.track span{display:block;height:100%;background:var(--wine);width:0%;transition:width .25s}
+.screen{display:none;min-height:calc(100dvh - 68px);padding:0 22px 22px;flex-direction:column}
+.screen.active{display:flex}
+.question-top{display:flex;align-items:center;justify-content:space-between;padding:17px 0 13px}
+.back{border:0;background:transparent;color:var(--wine);padding:8px 0;font-size:13px;font-weight:650}
+.phase-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:right}
+.question-progress{height:3px;background:#f0e4e8;border-radius:9px;overflow:hidden}
+.question-progress span{display:block;height:100%;background:var(--wine);width:0%;transition:width .2s}
+.question-stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:30px 2px 36px}
+.q-kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--wine-soft);margin-bottom:22px}
+.question-text{font:clamp(32px,8.5vw,49px)/1.08 var(--serif);letter-spacing:-.035em;color:var(--wine-deep);margin:0;max-width:650px;font-weight:500}
+.q-hint{font-size:13px;line-height:1.6;color:var(--muted);margin:23px 0 0;max-width:420px}
+.answer-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:20px 0 9px}
+textarea{width:100%;min-height:84px;resize:vertical;border:1px solid var(--line);background:#fffafa;border-radius:15px;padding:14px;color:var(--ink);font-size:14px;line-height:1.5}
+textarea::placeholder{color:#b4a4a9}
+.controls{padding-top:15px;display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
+.btn{border-radius:15px;min-height:52px;padding:13px 16px;border:1px solid var(--wine);font-size:13px;font-weight:650}
+.btn-secondary{background:transparent;color:var(--wine)}
+.btn-primary{background:var(--wine);color:white}
+.btn-primary:active{background:var(--wine-deep)}
+.end-screen{display:none;padding:34px 22px 30px;min-height:calc(100dvh - 68px)}
+.end-screen.active{display:flex;flex-direction:column;justify-content:center}
+.end-screen h2{font:42px/1 var(--serif);color:var(--wine-deep);font-weight:500}
+.end-screen p{font-size:14px;line-height:1.7;color:#6f6064}
+.footer-note{text-align:center;font-size:10px;color:#a8959b;margin:24px 0 0}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--wine-deep);color:white;border-radius:30px;padding:11px 16px;font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10}
+.toast.show{opacity:1}
+@media(min-width:600px){
+ .app{margin:20px auto;min-height:calc(100dvh - 40px);border-radius:28px;box-shadow:0 18px 70px #6b23351a}
+ .topbar{border-radius:28px 28px 0 0}
+ main{padding:34px 38px 42px}
+ .screen{padding-left:38px;padding-right:38px;min-height:calc(100dvh - 108px)}
+ .question-stage{padding-left:14px;padding-right:14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button class="icon-btn" id="headerBack" aria-label="Назад" style="visibility:hidden">‹</button>
+    <div class="wordmark">Наш разговор<small>пространство для двоих</small></div>
+    <button class="icon-btn" id="homeBtn" aria-label="На главную">⌂</button>
+  </header>
+
+  <main id="home">
+    <div class="eyebrow">Я хочу услышать тебя — и быть услышанным</div>
+    <h1>Ближе.<br>Честнее.<br>Вместе.</h1>
+    <p class="intro">Я хочу, чтобы мы спокойно поговорили о нас, постарались понять чувства друг друга и договорились о следующих шагах. Нам не нужно отвечать идеально — важно быть честными друг с другом.</p>
+
+    <section class="cover">
+      <div class="eyebrow">Наш разговор · 01—07</div>
+      <h2>Не чтобы победить.<br>Чтобы понять друг друга.</h2>
+      <p>Давай идти по одному вопросу и не торопить друг друга.</p>
+    </section>
+
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Наш путь</span><span id="stageProgressText">0 из 7 этапов</span></div>
+      <div class="track"><span id="stageProgressBar"></span></div>
+    </div>
+    <div class="section-head"><h2>Этапы разговора</h2><span class="small-note">начнём с любого</span></div>
+    <div class="stage-list" id="stageList"></div>
+    <p class="footer-note">Наш разговор · только для нас двоих</p>
+  </main>
+
+  <section class="screen" id="questionScreen" aria-live="polite">
+    <div class="question-top">
+      <button class="back" id="backHome">← Все этапы</button>
+      <div class="phase-label" id="phaseLabel"></div>
+    </div>
+    <div class="question-progress"><span id="questionProgressBar"></span></div>
+    <div class="question-stage">
+      <div class="q-kicker" id="questionCounter"></div>
+      <h2 class="question-text" id="questionText"></h2>
+      <p class="q-hint" id="questionHint"></p>
+      <label class="answer-label" for="notes">Если хочется — запиши свою мысль</label>
+      <textarea id="notes" placeholder="Наши мысли и договорённости…"></textarea>
+    </div>
+    <div class="controls">
+      <button class="btn btn-secondary" id="prevQuestion">Назад</button>
+      <button class="btn btn-primary" id="nextQuestion">Следующий вопрос →</button>
+    </div>
+  </section>
+
+  <section class="end-screen" id="endScreen">
+    <div class="eyebrow">Этот этап пройден</div>
+    <h2>Спасибо, что мы смогли поговорить честно.</h2>
+    <p>Нам не обязательно решить всё за один разговор. Для меня важно, что мы нашли время услышать друг друга. Мы можем вернуться к этому этапу позже или продолжить дальше.</p>
+    <button class="btn btn-primary" id="finishStage">Отметить этап завершённым</button>
+    <button class="btn btn-secondary" id="returnHome" style="margin-top:10px">Вернуться к этапам</button>
+  </section>
+</div>
+<div class="toast" id="toast">Сохранено</div>
+<script>
+const stages = [
+ {title:"Что нас объединяет",subtitle:"Вспомнить, почему мы выбрали друг друга",questions:[
+  ["Что в наших отношениях по-прежнему ценно для тебя?","Давай начнём с того, что между нами живо сейчас, а не только с того, что болит."],
+  ["В какие моменты рядом со мной ты чувствуешь себя любимым человеком?","Расскажи о небольших жестах, словах и обычных днях."],
+  ["Что ты особенно не хочешь потерять в наших отношениях?","Давай назовём не только друг друга, но и то, что мы создаём вместе."],
+  ["Что в нас двоих получается хорошо, даже когда нам трудно?","Давай вспомним конкретные примеры, а не будем ограничиваться общими словами."]
+ ]},
+ {title:"Что значит быть вместе",subtitle:"Определённость, выбор и ожидания",questions:[
+  ["Что для тебя значит осознанно выбирать наши отношения?","Как это проявляется в наших действиях, а не только в словах?"],
+  ["Что помогает тебе чувствовать уверенность в нашем общем будущем?","Давай говорить о потребностях, а не о проверках или гарантиях."],
+  ["Что для тебя означает сомневаться в отношениях — и что это не означает?","Давай попробуем отличать временное тяжёлое состояние от окончательного решения."],
+  ["Как нам честно говорить о сомнениях, не превращая их сразу в угрозу расставания?","Давай подумаем, какие слова и договорённости могли бы нам помочь."]
+ ]},
+ {title:"Близость и повседневность",subtitle:"Чувствовать связь и безопасность рядом",questions:[
+  ["Что помогает тебе чувствовать эмоциональную близость со мной?","Расскажи, что помогает тебе чувствовать близость: разговор, прикосновения, время вместе или что-то другое."],
+  ["Когда тебе хочется близости, а когда — пространства?","Давай объясним друг другу, как замечать эту разницу."],
+  ["Что в нашей повседневной жизни стоит изменить, чтобы нам обоим было легче?","Давай выберем конкретные вещи, которые мы можем изменить."],
+  ["Как мы можем говорить о болезненных чувствах, не обвиняя друг друга?","Давай говорить от себя: «я чувствую», «мне нужно»."]
+ ]},
+ {title:"Свобода и личные границы",subtitle:"Сохранять себя, оставаясь парой",questions:[
+  ["Какие личные границы для тебя особенно важны в отношениях?","Давай помнить, что границы нужны для безопасности, а не для управления друг другом."],
+  ["Как нам договариваться о личном времени и общении с другими людьми?","Давай обсудим наши ожидания и договоримся о правилах, одинаково уважительных для нас обоих."],
+  ["Что помогает тебе говорить «нет» или просить паузу без страха последствий?","Подумайте, как реагировать на отказ уважительно."],
+  ["Где забота друг о друге может незаметно превращаться в контроль?","Давай приведём примеры без попытки назначить виноватого."]
+ ]},
+ {title:"Конфликты без давления",subtitle:"Оставаться на одной стороне, даже споря",questions:[
+  ["Что ты обычно чувствуешь в первые минуты нашей ссоры?","Давай сначала опишем свои чувства, а затем обсудим конкретные поступки."],
+  ["Какие мои слова или действия заставляют тебя закрываться?","Давай приведём конкретные примеры и объясним, как они на нас влияют."],
+  ["Как понять, что одному из нас нужна пауза, и когда мы возвращаемся к разговору?","Давай договоримся, чтобы пауза не становилась наказанием или бессрочным молчанием."],
+  ["Что каждый из нас может сделать, чтобы спор не превращался в борьбу за правоту?","Давай каждый назовём хотя бы одно действие, которое готовы изменить со своей стороны."]
+ ]},
+ {title:"Ответственность и изменения",subtitle:"Не обещания, а посильные шаги",questions:[
+  ["За что в наших трудностях каждый из нас готов взять ответственность?","Давай говорить о собственных действиях, а не составлять список ошибок друг друга."],
+  ["Какой мой поступок помог бы тебе почувствовать реальные изменения?","Давай выберем конкретный шаг, который действительно можем выполнить."],
+  ["Какие повторяющиеся ситуации нам стоит разбирать со специалистом?","Нам не обязательно справляться со всем самостоятельно — мы можем обратиться за профессиональной поддержкой."],
+  ["Как мы поймём, что наши отношения постепенно становятся безопаснее и крепче?","Давай назовём конкретные признаки изменений, не требуя друг от друга никогда не ошибаться."]
+ ]},
+ {title:"Наш план на ближайшее время",subtitle:"Договориться о том, что будет дальше",questions:[
+  ["Что каждому из нас сейчас нужнее всего от этих отношений?","Давай прямо скажем, что каждому из нас нужно, не ожидая, что другой догадается."],
+  ["Какие два небольших действия мы готовы попробовать в ближайшую неделю?","Давай выберем немного конкретных и выполнимых действий вместо больших неопределённых обещаний."],
+  ["Как мы будем проверять, что договорённости работают для обоих?","Давай выберем спокойный момент и договоримся, как будем возвращаться к таким разговорам."],
+  ["С чем мы хотим уйти из этого разговора сегодня?","Давай каждый скажем, с какой мыслью, договорённостью или открытым вопросом уходим из разговора."]
+ ]}
+];
+const $ = id => document.getElementById(id);
+let currentStage=0, currentQuestion=0;
+let state = {completed:[], notes:{}};
+try { const saved=JSON.parse(localStorage.getItem("our-talk-v2")||"null"); if(saved) state={...state,...saved}; } catch(e){}
+function save(){try{localStorage.setItem("our-talk-v2",JSON.stringify(state));}catch(e){}}
+function showToast(text){$("toast").textContent=text;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1300);}
+function renderHome(){
+ $("home").style.display="block"; $("questionScreen").classList.remove("active"); $("endScreen").classList.remove("active");
+ $("headerBack").style.visibility="hidden";
+ const list=$("stageList"); list.innerHTML="";
+ stages.forEach((s,i)=>{
+  const done=state.completed.includes(i);
+  const b=document.createElement("button"); b.className="stage-card"+(done?" done":""); b.type="button";
+  b.innerHTML=`<div class="stage-number">${done?"✓":String(i+1).padStart(2,"0")}</div><div><h3>${s.title}</h3><p>${s.subtitle}</p></div><div class="arrow">›</div>`;
+  b.addEventListener("click",()=>openStage(i,0)); list.appendChild(b);
+ });
+ const n=state.completed.length; $("stageProgressText").textContent=`${n} из ${stages.length} этапов`; $("stageProgressBar").style.width=(n/stages.length*100)+"%";
+}
+function openStage(s,q){
+ currentStage=s; currentQuestion=q;
+ $("home").style.display="none"; $("endScreen").classList.remove("active"); $("questionScreen").classList.add("active"); $("headerBack").style.visibility="visible";
+ renderQuestion();
+}
+function renderQuestion(){
+ const stage=stages[currentStage], item=stage.questions[currentQuestion];
+ $("phaseLabel").textContent=`Этап ${String(currentStage+1).padStart(2,"0")} · ${stage.title}`;
+ $("questionCounter").textContent=`Вопрос ${currentQuestion+1} из ${stage.questions.length}`;
+ $("questionText").textContent=item[0]; $("questionHint").textContent=item[1];
+ $("questionProgressBar").style.width=((currentQuestion+1)/stage.questions.length*100)+"%";
+ $("notes").value=state.notes[`${currentStage}-${currentQuestion}`]||"";
+ $("prevQuestion").disabled=currentQuestion===0;
+ $("prevQuestion").style.opacity=currentQuestion===0?".42":"1";
+ $("nextQuestion").textContent=currentQuestion===stage.questions.length-1?"Завершить этап":"Следующий вопрос →";
+}
+function saveNote(){state.notes[`${currentStage}-${currentQuestion}`]=$("notes").value;save();}
+$("notes").addEventListener("input",saveNote);
+$("backHome").addEventListener("click",()=>{saveNote();renderHome();});
+$("headerBack").addEventListener("click",()=>{saveNote();renderHome();});
+$("homeBtn").addEventListener("click",()=>{saveNote();renderHome();});
+$("prevQuestion").addEventListener("click",()=>{if(currentQuestion>0){saveNote();openStage(currentStage,currentQuestion-1)}});
+$("nextQuestion").addEventListener("click",()=>{
+ saveNote();
+ if(currentQuestion<stages[currentStage].questions.length-1){openStage(currentStage,currentQuestion+1);}
+ else{$("questionScreen").classList.remove("active");$("endScreen").classList.add("active");$("headerBack").style.visibility="visible";}
+});
+$("finishStage").addEventListener("click",()=>{
+ if(!state.completed.includes(currentStage))state.completed.push(currentStage);
+ save();showToast("Этап отмечен как завершённый");
+ if(currentStage<stages.length-1){renderHome();}else{renderHome();window.scrollTo({top:0,behavior:"smooth"});}
+});
+$("returnHome").addEventListener("click",renderHome);
+renderHome();
+</script>
+</body>
+</html>
